@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:layout_margin="4dp"
     android:id="@+id/listitem_poster_fragment_imgvPoster"
-    android:src="@mipmap/ic_launcher">
+    android:src="@mipmap/ic_launcher"
+    android:adjustViewBounds="true">
 
 </ImageView>

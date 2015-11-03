@@ -131,7 +131,7 @@ public class PosterFragment extends Fragment {
                 final String MOVIES_BASE_URL = "http://api.themoviedb.org/3/discover/movie";
                 final String SORT_PARAM = "sort_by";
                 final String API_PARAM = "api_key";
-                final String API_KEY = "INSERT_YOUR_KEY";
+                final String API_KEY = mCtx.getString(R.string.poster_movies_API_KEY);
 
                 Uri builtUri = Uri.parse(MOVIES_BASE_URL).buildUpon()
                         .appendQueryParameter(SORT_PARAM, movieSort)

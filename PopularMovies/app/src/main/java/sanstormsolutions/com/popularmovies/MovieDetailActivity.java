@@ -1,8 +1,8 @@
 package sanstormsolutions.com.popularmovies;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +26,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_detail);
+        setContentView(R.layout.content_movie_detail);
 
         Intent intent = getIntent();
         strTitle = intent.getStringExtra("title");
@@ -35,6 +35,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         strPoster = intent.getStringExtra("posterUrl");
         strRating = intent.getStringExtra("userRating");
 
+        android.support.v7.app.ActionBar ab = getSupportActionBar();
+        ab.setTitle(strTitle);
         setupViews();
     }
 
@@ -62,19 +64,19 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void setupViews() {
-        mPoster = (ImageView) findViewById(R.id.activity_movie_detail_imgvPoster);
+        mPoster = (ImageView) findViewById(R.id.content_movie_detail_imgvPoster);
         Picasso.with(this).load(strPoster).error(R.mipmap.ic_launcher).into(mPoster);
 
-        mTitle = (TextView) findViewById(R.id.activity_movie_detail_txtvMovieTitle);
-        mTitle.setText(strTitle);
+        /*mTitle = (TextView) findViewById(R.id.content_movie_detail_txtvMovieTitle);
+        mTitle.setText(strTitle);*/
 
-        mOverView = (TextView) findViewById(R.id.activity_movie_detail_txtvMovieOverview);
+        mOverView = (TextView) findViewById(R.id.content_movie_detail_txtvMovieOverview);
         mOverView.setText(strOverView);
 
-        mReleaseDate = (TextView) findViewById(R.id.activity_movie_detail_txtvReleaseDate);
+        mReleaseDate = (TextView) findViewById(R.id.content_movie_detail_txtvReleaseDate);
         mReleaseDate.setText(strReleaseDate);
 
-        mRating = (TextView) findViewById(R.id.activity_movie_detail_txtvUserRating);
+        mRating = (TextView) findViewById(R.id.content_movie_detail_txtvUserRating);
         mRating.setText(strRating);
     }
 }
