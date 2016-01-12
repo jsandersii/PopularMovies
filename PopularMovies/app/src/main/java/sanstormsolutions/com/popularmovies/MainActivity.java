@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.stetho.Stetho;
+
 public class MainActivity extends AppCompatActivity {
     private final static String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -18,6 +20,14 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.activity_main_container,new PosterFragment())
                     .commit();
         }
+
+        //Enable Stetho for application debugging
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .build()
+        );
 
     }
 

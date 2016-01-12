@@ -50,12 +50,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 String posterUrl = getImageUrl(movieData.getPosterPath());
                 Double userRating = movieData.getUser_rating();
                 String user_rating = userRating.toString();
+                String movieId = movieData.getMovieId();
                 Intent intent = new Intent(context, MovieDetailActivity.class);
                 intent.putExtra("title", title);
                 intent.putExtra("overView", overView);
                 intent.putExtra("releaseDate", releaseDate);
                 intent.putExtra("posterUrl", posterUrl);
                 intent.putExtra("userRating", user_rating);
+                intent.putExtra("movieId", movieId);
                 context.startActivity(intent);
 
             }

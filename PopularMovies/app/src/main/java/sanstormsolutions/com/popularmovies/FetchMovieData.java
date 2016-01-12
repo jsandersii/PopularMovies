@@ -101,9 +101,10 @@ public class FetchMovieData {
                     String posterPath = object.getString("poster_path");
                     String movieOverview = object.getString("overview");
                     String release_date = object.getString("release_date");
+                    String movieId = object.getString("id");
                     double vote_average = object.getDouble("vote_average");
 
-                    movieData = new MovieModel(posterPath,movieTitle,movieOverview,vote_average,release_date);
+                    movieData = new MovieModel(posterPath,movieTitle,movieOverview,vote_average,release_date,movieId);
                     aryResults.add(movieData);
                 }
 

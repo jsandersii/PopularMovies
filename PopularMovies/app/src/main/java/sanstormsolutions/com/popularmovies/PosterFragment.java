@@ -2,6 +2,7 @@ package sanstormsolutions.com.popularmovies;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
 
 
 /**
@@ -100,13 +102,15 @@ public class PosterFragment extends Fragment {
             new getMoviePosters().execute(mSortString);
             mMovieAdapter.notifyDataSetChanged();
             return true;
+        }else if (id == R.id.action_favorites){
+            getFavoriteMovies(movies);
+
         }
         return super.onOptionsItemSelected(item);
     }
 
     public class getMoviePosters extends AsyncTask<String, Void, ArrayList<MovieModel>> {
         private final String LOG_TAG = getMoviePosters.class.getSimpleName();
-        public ArrayList<MovieModel> mMovieResults = new ArrayList<>();
 
         @Override
         protected void onPreExecute(){
@@ -188,13 +192,14 @@ public class PosterFragment extends Fragment {
                     String posterPath = object.getString("poster_path");
                     String movieOverview = object.getString("overview");
                     String release_date = object.getString("release_date");
+                    String movieId = object.getString("id");
                     double vote_average = object.getDouble("vote_average");
 
-                    movieData = new MovieModel(posterPath,movieTitle,movieOverview,vote_average,release_date);
+                    movieData = new MovieModel(posterPath,movieTitle,movieOverview,vote_average,release_date,movieId);
                     aryResults.add(movieData);
                 }
 
-                Log.i(LOG_TAG, "Array Results: " + aryResults);
+                /*Log.i(LOG_TAG, "Array Results: " + aryResults);*/
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -238,6 +243,30 @@ public class PosterFragment extends Fragment {
 
 
 
+    }
+
+    private ArrayList<MovieModel> getFavoriteMovies(ArrayList<MovieModel> movies){
+        ArrayList<MovieModel> aryFavs;
+        ArrayList<MovieModel> movieData;
+        SharedPreferences movieFavs;
+        aryFavs= new ArrayList<>();
+        movieData = new ArrayList<>();
+        movieFavs = getContext().getSharedPreferences("movieDetails", 0);
+        Map<String,?> keys;
+
+        movieData = movies;
+        keys = movieFavs.getAll();
+
+        for (Map.Entry<String,?> entry : keys.entrySet()){
+            String movieTitle = entry.getKey();
+            String movieId = entry.getValue().toString();
+                for (int i = 0; i < movieData.size(); i++){
+                    movieData = movies.get(i);
+
+                }
+            aryFavs.add(entry.getValue().toString());
+        }
+        return aryFavs;
     }
 
 
